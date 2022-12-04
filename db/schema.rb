@@ -38,6 +38,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_054258) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "username"
+    t.string "id_from_spotify"
+    t.jsonb "spotify_info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

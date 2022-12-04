@@ -33,6 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # t.datetime :locked_at
 
       t.string :username
+      t.string :id_from_spotify
+      t.jsonb :spotify_info           
 
       t.timestamps null: false
     end
