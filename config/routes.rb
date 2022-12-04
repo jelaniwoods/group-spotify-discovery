@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'pages#home'
   resources :memberships
   resources :groups
   devise_for :users
