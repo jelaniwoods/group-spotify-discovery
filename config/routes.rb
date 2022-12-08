@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tracks
   root 'pages#home'
   resources :memberships
   resources :groups
