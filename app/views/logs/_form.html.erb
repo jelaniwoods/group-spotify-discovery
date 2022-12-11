@@ -1,0 +1,79 @@
+<% was_validated = log.errors.any? %>
+
+<% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+<%= form_for(log, html: form_html_options) do |f| %>
+  <div class="form-group">
+    <% track_class = "form-control" %>
+    <% track_was_invalid = log.errors.include?(:track) %>
+
+    <% if was_validated %>
+      <% if track_was_invalid %>
+        <% track_class << " is-invalid" %>
+      <% else %>
+        <% track_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :track %>
+
+    <%= f.text_field :track, class: track_class, placeholder: "Enter track" %>
+    <% if track_was_invalid %>
+      <% log.errors.full_messages_for(:track).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% user_class = "form-control" %>
+    <% user_was_invalid = log.errors.include?(:user) %>
+
+    <% if was_validated %>
+      <% if user_was_invalid %>
+        <% user_class << " is-invalid" %>
+      <% else %>
+        <% user_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :user %>
+
+    <%= f.text_field :user, class: user_class, placeholder: "Enter user" %>
+    <% if user_was_invalid %>
+      <% log.errors.full_messages_for(:user).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% played_at_class = "form-control" %>
+    <% played_at_was_invalid = log.errors.include?(:played_at) %>
+
+    <% if was_validated %>
+      <% if played_at_was_invalid %>
+        <% played_at_class << " is-invalid" %>
+      <% else %>
+        <% played_at_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :played_at %>
+
+    <%= f.datetime_field :played_at, class: played_at_class, placeholder: "Enter played at" %>
+    <% if played_at_was_invalid %>
+      <% log.errors.full_messages_for(:played_at).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>
