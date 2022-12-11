@@ -2,3 +2,18 @@
 <p>Find me in app/views/pages/home.html.erb</p>
 <%= current_user&.username %>
 <%= link_to 'Sign in with Spotify', '/auth/spotify', method: :post %>
+
+<hr>
+
+<% if current_user %>
+  <ul>
+    <% @recently_played.each do |log| %>
+      <li>
+        <%= log.track.name %>
+        <%= log.track.album_name %>
+        <%= link_to log.track.url %>
+        <%= image_tag log.track.image %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
