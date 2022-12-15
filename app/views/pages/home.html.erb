@@ -6,13 +6,17 @@
 <hr>
 
 <% if current_user %>
+  <h2>
+    Logs <%= @recently_played.count %>
+  </h2>
   <ul>
-    <% @recently_played.each do |log| %>
+    <% @recently_played.order(played_at: :desc ).each do |log| %>
       <li>
         <%= log.track.name %>
         <%= log.track.album_name %>
         <%= link_to log.track.url %>
         <%= image_tag log.track.image %>
+        <%= log.played_at.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
       </li>
     <% end %>
   </ul>
