@@ -9,14 +9,27 @@
   <h2>
     Logs <%= @recently_played.count %>
   </h2>
-  <ul>
+  <ul class="list-group list-group-flush">
     <% @recently_played.order(played_at: :desc ).each do |log| %>
-      <li>
-        <%= log.track.name %>
-        <%= log.track.album_name %>
-        <%= link_to log.track.url %>
-        <%= image_tag log.track.image %>
-        <%= log.played_at.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
+      <li class="list-group-item">
+        <div class="d-flex">
+          <div class="flex-shrink-0">
+            <%= image_tag log.track.image, width: 150 %>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <div class="display-6">
+              <%= log.track.name %>
+            </div>
+            <small>
+              <%= log.track.album_name %>
+            </small>
+            <br>
+            <%= link_to log.track.url %>
+            <p>
+              Played at: <%= log.played_at.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
+            </p>
+          </div>
+        </div>
       </li>
     <% end %>
   </ul>
