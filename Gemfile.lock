@@ -81,6 +81,7 @@ GEM
     bootsnap (1.15.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    chartkick (4.2.1)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     cssbundling-rails (1.1.1)
@@ -112,6 +113,9 @@ GEM
       domain_name (~> 0.5)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.1.5)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     indefinite_article (0.2.5)
       activesupport
     io-console (0.5.11)
@@ -259,11 +263,13 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  chartkick
   cssbundling-rails
   debug
   devise
   dotenv-rails
   draft_generators!
+  importmap-rails (~> 1.1)
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
