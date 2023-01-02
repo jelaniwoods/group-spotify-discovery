@@ -3,6 +3,7 @@
 # Table name: logs
 #
 #  id         :bigint           not null, primary key
+#  json       :jsonb
 #  played_at  :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

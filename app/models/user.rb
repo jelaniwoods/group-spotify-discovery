@@ -40,7 +40,8 @@ class User < ApplicationRecord
       )
       logs.find_or_create_by(
         track: t,
-        played_at: DateTime.parse(track.played_at)
+        played_at: DateTime.parse(track.played_at),
+        json: track
       )
     end
     logs
