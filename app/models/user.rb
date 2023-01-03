@@ -38,11 +38,11 @@ class User < ApplicationRecord
         image: track.album.images[0]["url"],
         url: track.external_urls["spotify"]
       )
-      logs.find_or_create_by(
+      l = logs.find_or_create_by(
         track: t,
-        played_at: DateTime.parse(track.played_at),
-        json: track
+        played_at: DateTime.parse(track.played_at)
       )
+      l.update(json: track)
     end
     logs
   end
