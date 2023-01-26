@@ -7,4 +7,4 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     scope: 'user-read-email user-read-recently-played'
 end
 
-OmniAuth.config.allowed_request_methods = [:post, :get]
+OmniAuth.config.allowed_request_methods = [:post]

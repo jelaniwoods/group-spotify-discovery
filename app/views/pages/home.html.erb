@@ -1,7 +1,10 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 <%= current_user&.username %>
-<%= link_to 'Sign in with Spotify', '/auth/spotify', method: :post %>
+<%= form_with url: "/auth/spotify", method: :post do |form| %>
+  <%= form.submit "Sign in with Spotify" %>
+<% end %>
+
 
 <hr>
 
