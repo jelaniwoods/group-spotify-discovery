@@ -9,7 +9,11 @@
 <hr>
 
 <% if current_user %>
+  <h6>listening activity</h6>
   <%= line_chart current_user.logs.group_by_day(:played_at).count %>
+  <hr>
+  <h6>most listened to songs in past week</h6>
+  <%= line_chart current_user.logs.joins(:track).where(played_at: 1.week.ago..).top(:name) %>
   <hr>
   <h2>
     Logs <%= @recently_played.count %>
