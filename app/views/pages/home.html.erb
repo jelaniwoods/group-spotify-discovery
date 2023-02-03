@@ -13,7 +13,43 @@
   <%= line_chart current_user.logs.group_by_day(:played_at).count %>
   <hr>
   <h6>most listened to songs in past week</h6>
-  <%= line_chart current_user.logs.joins(:track).where(played_at: 1.week.ago..).top(:name) %>
+  <%#= line_chart current_user.logs.joins(:track).where(played_at: 1.week.ago..).top(:name) %>
+  <ul class="list-group list-group-flush">
+    <% current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name).each do |log| %>
+      <li class="list-group-item">
+        <% track = Track.find_by(name: log[0]) %>
+        <div class="d-flex">
+          <div class="flex-shrink-0">
+            <%= image_tag track.image, width: 150 %>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <div class="display-6">
+              <%= track.name %>
+            </div>
+            <small>
+              <%= track.album_name %>
+            </small>
+            <br>
+            <%= link_to track.url %>
+            <p>
+              <ul>
+              Played <%= log[-1] %> <%= 'time'.pluralize(log[-1]) %>: 
+              <% current_user.logs.where(track: track).pluck(:played_at).each do |t| %>
+              <li>
+                at <%= t.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
+              </li>
+              <% end %>
+              </ul>
+            </p>
+            <p>
+
+            </p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
   <hr>
   <h2>
     Logs <%= @recently_played.count %>
