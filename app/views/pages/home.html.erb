@@ -1,5 +1,4 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Group Discover Weekly</h1>
 <%= current_user&.username %>
 <%= form_with url: "/auth/spotify", method: :post do |form| %>
   <%= form.submit "Sign in with Spotify" %>
@@ -13,7 +12,6 @@
   <%= line_chart current_user.logs.group_by_day(:played_at).count %>
   <hr>
   <h6>most listened to songs in past week</h6>
-  <%#= line_chart current_user.logs.joins(:track).where(played_at: 1.week.ago..).top(:name) %>
   <ul class="list-group list-group-flush">
     <% current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name).each do |log| %>
       <li class="list-group-item">
