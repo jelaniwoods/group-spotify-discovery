@@ -13,67 +13,16 @@
   <hr>
   <h6>most listened to songs in past week</h6>
   <ul class="list-group list-group-flush">
-    <% current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name).each do |log| %>
-      <li class="list-group-item">
-        <% track = Track.find_by(name: log[0]) %>
-        <div class="d-flex">
-          <div class="flex-shrink-0">
-            <%= image_tag track.image, width: 150 %>
-          </div>
-          <div class="flex-grow-1 ms-3">
-            <div class="display-6">
-              <%= track.name %>
-            </div>
-            <small>
-              <%= track.album_name %>
-            </small>
-            <br>
-            <%= link_to track.url %>
-            <p>
-              <ul>
-              Played <%= log[-1] %> <%= 'time'.pluralize(log[-1]) %>: 
-              <% current_user.logs.where(track: track).pluck(:played_at).each do |t| %>
-              <li>
-                at <%= t.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
-              </li>
-              <% end %>
-              </ul>
-            </p>
-            <p>
-
-            </p>
-          </div>
-        </div>
-      </li>
-    <% end %>
+    <% top_weekly_track_names = current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name) %>
+    <%= render partial: "logs/list_item_top", collection: top_weekly_track_names, as: :log %>
   </ul>
+
   <hr>
-  <hr>
+
   <h2>
     Logs <%= @recently_played.count %>
   </h2>
   <ul class="list-group list-group-flush">
-    <% @recently_played.order(played_at: :desc ).each do |log| %>
-      <li class="list-group-item">
-        <div class="d-flex">
-          <div class="flex-shrink-0">
-            <%= image_tag log.track.image, width: 150 %>
-          </div>
-          <div class="flex-grow-1 ms-3">
-            <div class="display-6">
-              <%= log.track.name %>
-            </div>
-            <small>
-              <%= log.track.album_name %>
-            </small>
-            <br>
-            <%= link_to log.track.url %>
-            <p>
-              Played at: <%= log.played_at.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
-            </p>
-          </div>
-        </div>
-      </li>
-    <% end %>
+    <%= render partial: "logs/list_item", collection: @recently_played.order(played_at: :desc ), as: :log %>
   </ul>
 <% end %>
