@@ -23,6 +23,6 @@
     Logs <%= @recently_played.count %>
   </h2>
   <ul class="list-group list-group-flush">
-    <%= render partial: "logs/list_item", collection: @recently_played.order(played_at: :desc ), as: :log %>
+    <%= render partial: "logs/list_item", collection: @recently_played.order(played_at: :desc ).limit(20), as: :log %>
   </ul>
 <% end %>
