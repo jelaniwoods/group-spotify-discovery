@@ -27,6 +27,10 @@ class User < ApplicationRecord
   # TODO refresh_credentials -> use refresh token to get new tokens
   # do this when logging in
   has_many :logs
+  has_many :groups
+  has_many :memberships
+  has_many :unowned_groups, through: :memberships, source: :group
+
 
   def log_recently_played
     user = RSpotify::User.new(spotify_info)
