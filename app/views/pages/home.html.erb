@@ -11,7 +11,19 @@
   <h6>listening activity</h6>
   <%= line_chart current_user.logs.group_by_day(:played_at).count %>
   <hr>
-  <h6>most listened to songs in past week</h6>
+  <h3>Groups</h3>
+  <div>
+    <ul class="list-group">
+      <% current_user.groups.each do |group| %>
+        <li class="list-group-item">
+          <%= link_to group.name, group %>
+        </li>
+      <% end %>
+    </ul>
+    <%= render "groups/form", group: current_user.groups.build %>
+  </div>
+
+  <h4>most listened to songs in past week</h4>
   <ul class="list-group list-group-flush">
     <% top_weekly_track_names = current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name) %>
     <%= render partial: "logs/list_item_top", collection: top_weekly_track_names, as: :log %>

@@ -8,10 +8,17 @@
       <dt>Name</dt>
       <dd><%= group.name %></dd>
 
-      <dt>User</dt>
-      <dd><%= group.user %></dd>
+      <dt>Owner</dt>
+      <dd><%= group.user.username %></dd>
 
     </dl>
+    <ul class="list-group">
+      <% group.members.each do |member| %>
+        <li class="list-group-item">
+          <%= member.username %>
+        </li>
+      <% end %>
+    </ul>
 
     <div class="row">
       <div class="col">
