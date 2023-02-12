@@ -43,3 +43,23 @@
     Last updated <%= time_ago_in_words(group.updated_at) %> ago
   </div>
 </div>
+<hr>
+<h2>
+  <%= group.user.username %>
+</h2>
+<h4>most listened to songs in past week</h4>
+<ul class="list-group list-group-flush">
+  <% top_weekly_track_names = group.user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name) %>
+  <%= render partial: "logs/list_item_top", locals: {user: group.user}, collection: top_weekly_track_names, as: :log %>
+</ul>
+<hr>
+<% group.members.each do |member| %>
+<h2>
+  <%= member.username %>
+</h2>
+  <h4>most listened to songs in past week</h4>
+  <ul class="list-group list-group-flush">
+    <% top_weekly_track_names = member.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name) %>
+    <%= render partial: "logs/list_item_top", locals: {user: member}, collection: top_weekly_track_names, as: :log %>
+  </ul>
+<% end %>
