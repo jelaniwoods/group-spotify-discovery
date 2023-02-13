@@ -16,7 +16,7 @@
       <p>
         <ul>
         Played <%= log[-1] %> <%= 'time'.pluralize(log[-1]) %>: 
-        <% current_user.logs.where(track: track).pluck(:played_at).each do |t| %>
+        <% user.logs.where(track: track).pluck(:played_at).each do |t| %>
         <li>
           at <%= t.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
         </li>

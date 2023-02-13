@@ -26,7 +26,7 @@
   <h4>most listened to songs in past week</h4>
   <ul class="list-group list-group-flush">
     <% top_weekly_track_names = current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name) %>
-    <%= render partial: "logs/list_item_top", collection: top_weekly_track_names, as: :log %>
+    <%= render partial: "logs/list_item_top", locals: {user: current_user}, collection: top_weekly_track_names, as: :log %>
   </ul>
 
   <hr>
