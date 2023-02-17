@@ -1,46 +1,32 @@
 <div class="card mb-3">
-  <h2 class="card-header h4">
-    Group #<%= group.id %>
-  </h2>
+  <div class="card-header d-flex justify-content-between">
+    <h2 class="h4">
+      <%= group.name %>
+    </h2>
+
+    <div class="d-flex justify-content-between <%= "d-none" if current_user == group.user %>">
+      <%= link_to edit_group_url(group), class: "btn btn-block btn-outline-secondary" do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+      <%= link_to group, method: :delete, data: { confirm: "Do you really want to delete this group?" }, class: "btn btn-block btn-outline-secondary" do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    </div>
+  </div>
 
   <div class="card-body">
-    <dl class="mb-1">
-      <dt>Name</dt>
-      <dd><%= group.name %></dd>
-
-      <dt>Owner</dt>
-      <dd><%= group.user.username %></dd>
-
-    </dl>
+    <div class="h5">Members:</div>
     <ul class="list-group">
+      <li class="list-group-item">
+        <%= group.user.username %>
+        <i class="fa-solid fa-crown ml-5"></i>
+      </li>
       <% group.members.each do |member| %>
         <li class="list-group-item">
           <%= member.username %>
         </li>
       <% end %>
     </ul>
-
-    <div class="row">
-      <div class="col">
-        <%= link_to_show_or_back group, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
-      </div>
-
-      <div class="col">
-        <%= link_to edit_group_url(group), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
-        <% end %>
-      </div>
-
-      <div class="col">
-        <%= link_to group, method: :delete, data: { confirm: "Do you really want to delete this group?" }, class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-trash-alt"></i>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="card-footer text-muted">
-    Last updated <%= time_ago_in_words(group.updated_at) %> ago
   </div>
 </div>
 <hr>
