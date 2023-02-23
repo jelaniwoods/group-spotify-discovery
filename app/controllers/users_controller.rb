@@ -11,6 +11,6 @@ class UsersController < ApplicationController
         spotify_info: spotify_user.to_hash,
       )
     sign_in user
-    redirect_to root_path, notice: "yup"
+    redirect_to root_path, notice: "Signed in successfully!"
   end
 end
