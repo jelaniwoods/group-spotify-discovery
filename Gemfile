@@ -76,3 +76,4 @@ gem "importmap-rails", "~> 1.1"
 gem 'omniauth-rails_csrf_protection'
 gem "hightop"
 gem 'seed_dump'
+gem 'kaminari'
