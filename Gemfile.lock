@@ -83,6 +83,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     chartkick (4.2.1)
     concurrent-ruby (1.1.10)
@@ -289,6 +292,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bootsnap
+  bootstrap5-kaminari-views
   chartkick
   cssbundling-rails
   debug

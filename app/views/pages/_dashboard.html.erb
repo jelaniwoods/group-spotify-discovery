@@ -4,7 +4,7 @@
     <ul class="list-group list-group-flush">
       <% top_weekly_track_names = @recently_played_logs.top(:name) %>
       <%= render partial: "logs/list_item_top", locals: {user: current_user}, collection: top_weekly_track_names, as: :log %>
-      <%= paginate @recently_played_logs, remote: true %>
+      <%= paginate @recently_played_logs, remote: true, theme: 'bootstrap-5' %>
     </ul>
   </div>
   <div class="col-md-6">
