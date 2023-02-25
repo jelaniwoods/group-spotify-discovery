@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-6">
+    <h3>Most listened to:</h3>
+    <ul class="list-group list-group-flush">
+      <% top_weekly_track_names = current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name) %>
+      <%= render partial: "logs/list_item_top", locals: {user: current_user}, collection: top_weekly_track_names, as: :log %>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3>Monthly activity</h3>
+    <%= line_chart current_user.logs.where(played_at: 1.month.ago..).group_by_day(:played_at).count %>
+    <h3>Groups</h3>
+    <ul class="list-group">
+      <% current_user.groups.each do |group| %>
+        <li class="list-group-item">
+          <%= link_to group.name, group %>
+        </li>
+      <% end %>
+    </ul>
+    <%= render "groups/form", group: current_user.groups.build %>
+  </div>
+</div>

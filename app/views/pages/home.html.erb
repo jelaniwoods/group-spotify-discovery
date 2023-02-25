@@ -1,40 +1,10 @@
 <h1>Group Discover Weekly</h1>
-<%= current_user&.username %>
-<%= form_with url: "/auth/spotify", method: :post do |form| %>
-  <%= form.submit "Sign in with Spotify" %>
-<% end %>
-
-
-<hr>
-
-<% if current_user %>
-  <h6>listening activity</h6>
-  <%= line_chart current_user.logs.group_by_day(:played_at).count %>
+<% unless current_user %>
+  <%= form_with url: "/auth/spotify", method: :post do |form| %>
+    <%= form.submit "Sign in with Spotify" %>
+  <% end %>
+<% else %>
+  <h2><%= current_user.username %></h2>
   <hr>
-  <h3>Groups</h3>
-  <div>
-    <ul class="list-group">
-      <% current_user.groups.each do |group| %>
-        <li class="list-group-item">
-          <%= link_to group.name, group %>
-        </li>
-      <% end %>
-    </ul>
-    <%= render "groups/form", group: current_user.groups.build %>
-  </div>
-
-  <h4>most listened to songs in past week</h4>
-  <ul class="list-group list-group-flush">
-    <% top_weekly_track_names = current_user.logs.joins(:track).where(played_at: 1.week.ago..).limit(3).top(:name) %>
-    <%= render partial: "logs/list_item_top", locals: {user: current_user}, collection: top_weekly_track_names, as: :log %>
-  </ul>
-
-  <hr>
-
-  <h2>
-    Logs <%= @recently_played.count %>
-  </h2>
-  <ul class="list-group list-group-flush">
-    <%= render partial: "logs/list_item", collection: @recently_played.order(played_at: :desc ).limit(20), as: :log %>
-  </ul>
+  <%= render "dashboard" %>
 <% end %>
