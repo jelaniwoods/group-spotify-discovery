@@ -18,19 +18,19 @@
     <div class="h5">Members:</div>
     <ul class="list-group">
       <li class="list-group-item">
-        <%= group.user.username %>
+        <%= link_to group.user.username, "##{group.user.username}", class: "text-decoration-none" %>
         <i class="fa-solid fa-crown ml-5"></i>
       </li>
       <% group.members.each do |member| %>
         <li class="list-group-item">
-          <%= member.username %>
+          <%= link_to member.username, "##{member.username}", class: "text-decoration-none"  %>
         </li>
       <% end %>
     </ul>
   </div>
 </div>
 <hr>
-<h2>
+<h2 id="<%= group.user.username %>">
   <%= group.user.username %>
 </h2>
 <h4>most listened to songs in past week</h4>
@@ -40,7 +40,7 @@
 </ul>
 <hr>
 <% group.members.each do |member| %>
-<h2>
+<h2 id="<%= member.username %>">
   <%= member.username %>
 </h2>
   <h4>most listened to songs in past week</h4>
