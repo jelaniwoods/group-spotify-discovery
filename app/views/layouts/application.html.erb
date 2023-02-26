@@ -14,8 +14,9 @@
   </head>
 
   <body class="container">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <p class="notice <%= "d-none" if notice.blank? %>"><%= notice %></p>
+    <p class="alert <%= "d-none" if alert.blank? %>"><%= alert %></p>
+    <%= render "layouts/navbar" %>
     <%= yield %>
   </body>
 </html>
