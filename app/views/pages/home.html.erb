@@ -1,4 +1,3 @@
-<h1>Group Discover Weekly</h1>
 <% unless current_user %>
   <%= form_with url: "/auth/spotify", method: :post do |form| %>
     <%= form.submit "Sign in with Spotify" %>
