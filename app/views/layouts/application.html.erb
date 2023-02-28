@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GroupSpotifyDiscovery</title>
+    <title>Group Spotify Discover</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,9 +14,9 @@
   </head>
 
   <body class="container">
+    <%= render "layouts/navbar" %>
     <p class="notice <%= "d-none" if notice.blank? %>"><%= notice %></p>
     <p class="alert <%= "d-none" if alert.blank? %>"><%= alert %></p>
-    <%= render "layouts/navbar" %>
     <%= yield %>
   </body>
 </html>
