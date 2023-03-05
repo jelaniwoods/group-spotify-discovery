@@ -11,13 +11,15 @@
     <h3>Monthly activity</h3>
     <%= line_chart current_user.logs.where(played_at: 1.month.ago..).group_by_day(:played_at).count %>
     <h3>Groups</h3>
-    <ul class="list-group">
+    <div class="list-group mb-4">
       <% current_user.groups.each do |group| %>
-        <li class="list-group-item">
-          <%= link_to group.name, group %>
-        </li>
+        <%= link_to group, class: "list-group-item list-group-item-action d-flex justify-content-between" do %>
+          <%= group.name %>
+          <span><%= group.members.count %> members</span>
+        <% end %>
       <% end %>
-    </ul>
+    </div>
+    <h5>Create a Group</h5>
     <%= render "groups/form", group: current_user.groups.build %>
   </div>
 </div>
