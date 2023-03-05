@@ -11,4 +11,5 @@
 #  updated_at :datetime         not null
 #
 class Track < ApplicationRecord
+  has_many :logs
 end

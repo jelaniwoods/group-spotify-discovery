@@ -25,4 +25,8 @@ class Log < ApplicationRecord
   belongs_to :user
 
   paginates_per 3
+
+  def artists
+    json&.[]("artists")&.map { |j| j["name"] }&.to_sentence
+  end
 end

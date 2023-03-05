@@ -9,19 +9,24 @@
         <%= track.name %>
       </div>
       <small>
+        <%= track.logs.first.artists %> -
         <%= track.album_name %>
       </small>
       <br>
       <%= link_to track.url %>
       <p>
-        <ul>
-        Played <%= log[-1] %> <%= 'time'.pluralize(log[-1]) %>: 
-        <% user.logs.where(track: track).pluck(:played_at).each do |t| %>
-        <li>
-          at <%= t.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
-        </li>
-        <% end %>
-        </ul>
+        <details>
+          <summary>
+            Played <%= log[-1] %> <%= 'time'.pluralize(log[-1]) %>: 
+          </summary>
+          <ul>
+            <% user.logs.where(track: track).pluck(:played_at).each do |t| %>
+              <li>
+                at <%= t.in_time_zone("Central Time (US & Canada)").strftime("%D %r") %>
+              </li>
+            <% end %>
+          </ul>
+        </details> 
       </p>
     </div>
   </div>
