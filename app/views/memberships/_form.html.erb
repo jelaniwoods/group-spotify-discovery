@@ -16,7 +16,7 @@
     <% end %>
 
     <%= f.label :group %>
-
+    <input id="theme" />
     <%#= f.text_field :group, class: group_class, placeholder: "Enter group" %>
     <%= f.collection_select(:group_id, Group.all, :id, :name, { prompt: "Select a Group"} ) %>
 

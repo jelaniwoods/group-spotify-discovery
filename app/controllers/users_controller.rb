@@ -13,4 +13,9 @@ class UsersController < ApplicationController
     sign_in user
     redirect_to root_path, notice: "Signed in successfully!"
   end
+
+  def index
+    users = User.all
+    render json: users.to_json
+  end
 end

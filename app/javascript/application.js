@@ -2,4 +2,5 @@
 import * as bootstrap from "bootstrap"
 
 import "chartkick/chart.js"
-import "jquery"
+import "./jquery"
+import "./easy_autocomplete"
