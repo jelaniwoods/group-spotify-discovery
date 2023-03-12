@@ -31,6 +31,9 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :unowned_groups, through: :memberships, source: :group
 
+  def owns_group?(group)
+    self == group.user
+  end
 
   def log_recently_played
     user = RSpotify::User.new(spotify_info)
