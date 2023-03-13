@@ -21,4 +21,14 @@
 class Membership < ApplicationRecord
   belongs_to :group
   belongs_to :user
+  
+  validates :user, uniqueness: true
+  validate :user_cannot_own_group
+
+
+  def user_cannot_own_group
+    if user.present? && group.user == user
+      errors.add(:user, "can't be creator of group")
+    end
+  end
 end

@@ -21,7 +21,12 @@ class MembershipsController < ApplicationController
 
   # POST /memberships
   def create
-    @membership = Membership.new(membership_params)
+    user = User.find_by(username: params[:username])
+    create_params = membership_params
+    if user.present?
+      create_params = membership_params.merge({user_id: user.id})
+    end
+    @membership = Membership.new(create_params)
 
     if @membership.save
       redirect_to @membership, notice: "Membership was successfully created."
@@ -53,6 +58,6 @@ class MembershipsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def membership_params
-      params.require(:membership).permit(:group_id, :user_id)
+      params.require(:membership).permit(:group_id)
     end
 end

@@ -4,6 +4,29 @@
 
 <%= form_for(membership, html: form_html_options) do |f| %>
   <div class="form-group">
+    <% user_class = "form-control" %>
+    <% user_was_invalid = membership.errors.include?(:user) %>
+
+    <% if was_validated %>
+      <% if user_was_invalid %>
+        <% user_class << " is-invalid" %>
+      <% else %>
+        <% user_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= label_tag :username %>
+    <%= text_field_tag :username, nil, class: user_class, placeholder: "Enter username" %>
+    <% if user_was_invalid %>
+      <% membership.errors.full_messages_for(:user).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group mb-2">
     <% group_class = "form-control" %>
     <% group_was_invalid = membership.errors.include?(:group) %>
 
@@ -16,36 +39,10 @@
     <% end %>
 
     <%= f.label :group %>
-    <input id="theme" />
-    <%#= f.text_field :group, class: group_class, placeholder: "Enter group" %>
-    <%= f.collection_select(:group_id, Group.all, :id, :name, { prompt: "Select a Group"} ) %>
+    <%= f.collection_select(:group_id, current_user.groups, :id, :name, { prompt: "Select a Group"}, class: "form-control" ) %>
 
     <% if group_was_invalid %>
       <% membership.errors.full_messages_for(:group).each do |message| %>
-        <div class="invalid-feedback d-flex">
-          <%= message %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <% user_class = "form-control" %>
-    <% user_was_invalid = membership.errors.include?(:user) %>
-
-    <% if was_validated %>
-      <% if user_was_invalid %>
-        <% user_class << " is-invalid" %>
-      <% else %>
-        <% user_class << " is-valid" %>
-      <% end %>
-    <% end %>
-
-    <%= f.hidden_field :user_id, value:  current_user.id %>
-
-    <%#= f.text_field :user, class: user_class, placeholder: "Enter user" %>
-    <% if user_was_invalid %>
-      <% membership.errors.full_messages_for(:user).each do |message| %>
         <div class="invalid-feedback d-flex">
           <%= message %>
         </div>
