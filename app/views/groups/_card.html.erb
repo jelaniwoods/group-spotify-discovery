@@ -17,7 +17,12 @@
   </div>
 
   <div class="card-body">
-    <div class="h5">Members:</div>
+    <div class="d-flex justify-content-between">
+      <div class="h5">Members:</div>
+      <%= link_to new_membership_path, class: "link-secondary text-decoration-none" do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    </div>
     <ul class="list-group">
       <li class="list-group-item">
         <%= link_to group.user.username, "##{group.user.username}", class: "text-decoration-none" %>
@@ -28,6 +33,9 @@
           <%= link_to member.username, "##{member.username}", class: "text-decoration-none"  %>
         </li>
       <% end %>
+        <li class="list-group-item">
+
+        </li>
     </ul>
   </div>
 </div>
